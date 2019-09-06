@@ -33,7 +33,7 @@ public class Pixel {
         return blue;
     }
 
-    public Pixel Invert(){
-        
+    public Pixel invert(){
+        return new Pixel(255-red, 255-green, 255-blue);
     }
 }

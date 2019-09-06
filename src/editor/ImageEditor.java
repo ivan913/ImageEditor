@@ -13,11 +13,15 @@ public class ImageEditor {
         File output = new File(args[1]);
         String command = args[2];
 
-        Pixel[][] image = readFile(input);
+        Image image = readFile(input);
+
+        if(command.equals("invert")){
+            image = invert(image);
+        }
 
     }
 
-    static Pixel[][] readFile(File input){
+    static Image readFile(File input){
         try{
             Scanner scanner = new Scanner(input);
             scanner.next(); //expect P3
@@ -29,21 +33,33 @@ public class ImageEditor {
 
             scanner.nextInt(); //expect 255
 
-            Pixel[][] image = new Pixel[width][height];
+            Pixel[][] matrix = new Pixel[width][height];
 
             for(int row = 0; row < width; row += 1){
                 for(int column = 0; column < height; column += 1){
                     int red = scanner.nextInt();
                     int green = scanner.nextInt();
                     int blue = scanner.nextInt();
-                    image[row][column] = new Pixel(red, green, blue);
+                    matrix[row][column] = new Pixel(red, green, blue);
                 }
             }
-            return image;
+
+            return new Image(matrix);
         }catch(FileNotFoundException e){
             System.out.println("File not Found");
             return null;
         }
+    }
+
+    static Pixel[][] invert(Image image){
+
+        for (int r = 0; r < rows; r += 1){
+            for(int c = 0; c < columns; c += 1){
+                returnImage[r][c] = image[r][c].invert();
+            }
+        }
+
+        return returnImage;
     }
 
 
