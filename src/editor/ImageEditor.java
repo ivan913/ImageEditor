@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 public class ImageEditor {
 
-
     public static void main(String args[]){
         File input = new File(args[0]);
         File output = new File(args[1]);
@@ -38,8 +37,8 @@ public class ImageEditor {
 
             Pixel[][] matrix = new Pixel[width][height];
 
-            for(int row = 0; row < width; row += 1){
-                for(int column = 0; column < height; column += 1){
+            for(int row = 0; row < height; row += 1){
+                for(int column = 0; column < width; column += 1){
                     int red = scanner.nextInt();
                     int green = scanner.nextInt();
                     int blue = scanner.nextInt();
@@ -59,8 +58,8 @@ public class ImageEditor {
     }
 
     static Image invert(Image image){
-        int rows = image.getWidth();
-        int columns = image.getHeight();
+        int rows = image.getHeight();
+        int columns = image.getWidth();
         Image returnImage = new Image(rows, columns);
 
         for (int r = 0; r < rows; r += 1){
@@ -74,8 +73,8 @@ public class ImageEditor {
     }
 
     static Image grayscale(Image image){
-        int rows = image.getWidth();
-        int columns = image.getHeight();
+        int rows = image.getHeight();
+        int columns = image.getWidth();
         Image returnImage = new Image(rows, columns);
 
         for (int r = 0; r < rows; r += 1){
@@ -86,6 +85,24 @@ public class ImageEditor {
             }
         }
         return returnImage;
+    }
+
+    static Image emboss(Image image){
+        Pixel edgeVal = new Pixel(128,128,128);
+        for (int i = 0; i < image.getWidth(); i += 1){ // look at this later
+            image.setPixelAt(0, i, edgeVal);
+        }
+        for(int i = 0; i < image.getHeight(); i += 1){ // may have switched them
+            image.setPixelAt(i, 0, edgeVal);
+        }
+
+        for(int row = 1; row < image.getHeight(); row += 1){
+            for(int column = 1; column < image.getWidth(); row += 1){
+
+            }
+        }
+
+        return null;
     }
 
 
