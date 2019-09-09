@@ -19,6 +19,9 @@ public class ImageEditor {
             image = invert(image);
         }
 
+        if(command.equals("grayscale")){
+            image = grayscale(image);
+        }
     }
 
     static Image readFile(File input){
@@ -51,14 +54,37 @@ public class ImageEditor {
         }
     }
 
-    static Pixel[][] invert(Image image){
+    static void writeFile(Image image){
+
+    }
+
+    static Image invert(Image image){
+        int rows = image.getWidth();
+        int columns = image.getHeight();
+        Image returnImage = new Image(rows, columns);
 
         for (int r = 0; r < rows; r += 1){
             for(int c = 0; c < columns; c += 1){
-                returnImage[r][c] = image[r][c].invert();
+                Pixel p = image.getPixelAt(r,c);
+                p = p.invert();
+                returnImage.setPixelAt(r,c,p);
             }
         }
+        return returnImage;
+    }
 
+    static Image grayscale(Image image){
+        int rows = image.getWidth();
+        int columns = image.getHeight();
+        Image returnImage = new Image(rows, columns);
+
+        for (int r = 0; r < rows; r += 1){
+            for(int c = 0; c < columns; c += 1){
+                Pixel p = image.getPixelAt(r,c);
+                p = p.grayscale();
+                returnImage.setPixelAt(r,c,p);
+            }
+        }
         return returnImage;
     }
 

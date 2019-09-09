@@ -1,7 +1,7 @@
 package editor;
 
 public class Pixel {
-    int red, green, blue;
+    private int red, green, blue;
 
     public Pixel(int red, int green, int blue){
         this.red = red;
@@ -35,5 +35,10 @@ public class Pixel {
 
     public Pixel invert(){
         return new Pixel(255-red, 255-green, 255-blue);
+    }
+
+    public Pixel grayscale(){
+        int average = (red + green + blue) / 3;
+        return new Pixel(average,average,average);
     }
 }
