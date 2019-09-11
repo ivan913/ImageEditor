@@ -9,6 +9,12 @@ public class Pixel {
         this.blue = blue;
     }
 
+    public Pixel(Pixel pixel){
+        this.red = pixel.getRed();
+        this.green = pixel.getGreen();
+        this.blue = pixel.getBlue();
+    }
+
     public void setRed(int red) {
         this.red = red;
     }

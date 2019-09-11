@@ -1,6 +1,9 @@
 package editor;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 public class Image {
     private Pixel[][] matrix;
@@ -51,5 +54,23 @@ public class Image {
 
     public Pixel[][] getMatrix(){
         return matrix;
+    }
+
+    public String toString(){
+        StringBuilder writer = new StringBuilder();
+
+        for (int row = 0; row < this.height; row += 1){
+            for (int column = 0; column < this.width; column += 1){
+                writer.append(" ");
+                writer.append(matrix[row][column].getRed());
+                writer.append(" ");
+                writer.append(matrix[row][column].getGreen());
+                writer.append(" ");
+                writer.append(matrix[row][column].getBlue());
+            }
+            writer.append("\n");
+        }
+
+        return writer.toString();
     }
 }
