@@ -12,8 +12,8 @@ public class Image {
 
     public Image(Pixel[][] image){
         matrix = image;
-        width = matrix.length;
-        height = matrix[0].length;
+        height = matrix.length;
+        width = matrix[0].length;
     }
 
     public Image(Image image){
@@ -23,7 +23,7 @@ public class Image {
     }
 
     public Image(int width, int height){
-        matrix = new Pixel[width][height];
+        matrix = new Pixel[height][width];
         this.width = width;
         this.height = height;
     }
