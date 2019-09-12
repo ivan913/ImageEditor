@@ -40,7 +40,7 @@ public class ImageEditor {
 
             scanner.nextInt(); //expect 255
 
-            Pixel[][] matrix = new Pixel[width][height];
+            Pixel[][] matrix = new Pixel[height][width];
 
             for(int row = 0; row < height; row += 1){
                 for(int column = 0; column < width; column += 1){
