@@ -22,9 +22,9 @@ public class Image {
         height = image.getHeight();
     }
 
-    public Image(int width, int height){
+    public Image(int rows, int columns){
         matrix = new Pixel[height][width];
-        this.width = width;
+        this.width = ;
         this.height = height;
     }
 
