@@ -8,7 +8,7 @@ public class ImageEditor {
 
     public static void main(String args[]){
         File input = new File(args[0]);
-        File output = new File(args[1]);
+        String output = args[1];
         String command = args[2];
 
         Image image = readFile(input);
@@ -58,7 +58,7 @@ public class ImageEditor {
         }
     }
 
-    static void writeFile(Image image, File output){
+    static void writeFile(Image image, String output){
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(output));
             writer.write("P3 " + image.getWidth() + " " + image.getHeight() + " 255");
@@ -68,6 +68,7 @@ public class ImageEditor {
         }
         catch(IOException e){
             System.out.println("File write failed.");
+            System.out.println(e.toString());
         }
     }
 
