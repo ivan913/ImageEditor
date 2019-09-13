@@ -25,6 +25,11 @@ public class ImageEditor {
             image = emboss(image);
         }
 
+        if(command.equals("motionblur")){
+            int n = Integer.parseInt(args[3]);
+            image = blur(image, n);
+        }
+
         writeFile(image, output);
     }
 
@@ -147,6 +152,43 @@ public class ImageEditor {
             returnImage.setPixelAt(0, i, edgeVal);
         }
 
+        return returnImage;
+    }
+
+    static Image blur(Image image, int n){
+        int rows = image.getHeight();
+        int columns = image.getWidth();
+
+        Image returnImage = new Image(rows, columns);
+
+        for(int row = 0; row < rows; row += 1){
+            for(int column = 0; column < columns; column += 1){
+                int nTrue = n;
+
+                if(column+n > columns-1){
+                    nTrue = columns - column;
+                }
+
+                int redTotal = 0;
+                int greenTotal = 0;
+                int blueTotal = 0;
+
+                for(int i = 0; i < nTrue; i += 1){
+                    Pixel currentPixel = image.getPixelAt(row, column + i);
+                    redTotal += currentPixel.getRed();
+                    greenTotal += currentPixel.getGreen();
+                    blueTotal += currentPixel.getBlue();
+                }
+
+                int redAverage = redTotal/nTrue;
+                int greenAverage = greenTotal/nTrue;
+                int blueAverage = blueTotal/nTrue;
+
+                Pixel newPixel = new Pixel(redAverage, greenAverage, blueAverage);
+
+                returnImage.setPixelAt(row, column, newPixel);
+            }
+        }
         return returnImage;
     }
 
