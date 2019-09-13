@@ -23,9 +23,9 @@ public class Image {
     }
 
     public Image(int rows, int columns){
-        matrix = new Pixel[height][width];
-        this.width = ;
-        this.height = height;
+        matrix = new Pixel[rows][columns];
+        this.width = columns ;
+        this.height = rows;
     }
 
     public int getWidth() {

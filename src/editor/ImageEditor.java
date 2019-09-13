@@ -104,16 +104,15 @@ public class ImageEditor {
 
     static Image emboss(Image image){
         Pixel edgeVal = new Pixel(128,128,128);
-        Image returnImage = new Image(image.getWidth(), image.getHeight());
-        for (int i = 0; i < image.getWidth(); i += 1){ // look at this later
-            returnImage.setPixelAt(0, i, edgeVal);
-        }
-        for(int i = 0; i < image.getHeight(); i += 1){ // may have switched them
-            returnImage.setPixelAt(i, 0, edgeVal);
-        }
+        Image returnImage = new Image(image.getHeight(), image.getWidth());
 
-        for(int row = 1; row < image.getHeight(); row += 1){
-            for(int column = 1; column < image.getWidth(); row += 1) {
+        int rows = image.getHeight();
+        int columns = image.getWidth();
+
+
+
+        for(int row = 1; row < rows; row += 1){
+            for(int column = 1; column < columns; column += 1) {
                 Pixel pixel = new Pixel(image.getPixelAt(row, column));
                 Pixel otherPixel = image.getPixelAt(row - 1, column - 1);
                 int redDiff = pixel.getRed() - otherPixel.getRed();
@@ -122,10 +121,10 @@ public class ImageEditor {
 
                 int largestDiff;
 
-                if ((Math.abs(redDiff) > Math.abs(greenDiff)) && (Math.abs(redDiff) > Math.abs(blueDiff))) {
+                if ((Math.abs(redDiff) >= Math.abs(greenDiff)) && (Math.abs(redDiff) >= Math.abs(blueDiff))) {
                     largestDiff = redDiff;
                 }
-                else if ((Math.abs(greenDiff) > Math.abs(redDiff)) && (Math.abs(greenDiff) > Math.abs(blueDiff))){
+                else if ((Math.abs(greenDiff) >= Math.abs(redDiff)) && (Math.abs(greenDiff) >= Math.abs(blueDiff))){
                     largestDiff = greenDiff;
                 }
                 else{
@@ -137,11 +136,18 @@ public class ImageEditor {
                 if(value < 0) value = 0;
                 else if(value > 255) value = 255;
 
-                returnImage.setPixelAt(row, column, pixel);
+                returnImage.setPixelAt(row, column, new Pixel(value,value,value));
             }
         }
 
-        return null;
+        for (int i = 0; i < rows; i += 1){ // rows
+            returnImage.setPixelAt(i, 0, edgeVal);
+        }
+        for(int i = 0; i < columns; i += 1){ // columns
+            returnImage.setPixelAt(0, i, edgeVal);
+        }
+
+        return returnImage;
     }
 
 
